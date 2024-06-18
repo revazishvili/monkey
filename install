@@ -1,0 +1,27 @@
+# დეინსტალირება ძველი pipenv-ის (ამას ვაკეთებს იმისთვის რომ თუ გვიყენია ძველი ვერსია მოვიშოროთ, ყოველ შემთხვევაში გადაატარეთ)
+sudo apt remove pipenv
+
+# დააყენეთ Python3 და venv მოდული
+sudo apt install python3 python3-venv
+
+# დააყენეთ pipenv უახლესი ვერსია pip-ით
+python3 -m pip install --user pipenv
+
+# დააყენეთ gevent მოდული
+python3 -m pip install gevent
+
+# გადმოწერეთ დეპლოიმენტის სკრიპტი
+wget https://raw.githubusercontent.com/guardicore/monkey/develop/deployment_scripts/deploy_linux.sh
+chmod u+x ./deploy_linux.sh
+
+# გაუშვით სკრიპტი საჭირო პარამეტრებით (ბაინარული ფაილების ჩამოტვირთვით)
+./deploy_linux.sh /home/user/infection_monkey
+
+# შედით Monkey Island დირექტორიაში
+cd /home/user/infection_monkey/monkey/monkey_island
+
+# შექმენით ვირტუალური გარემო და დააყენეთ საჭირო დამოკიდებულებები
+python3 -m pipenv install
+
+# დაიწყეთ Monkey Island სერვერი ვირტუალურ გარემოში
+python3 -m pipenv run python ../monkey_island.py
